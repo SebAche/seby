@@ -1,0 +1,12 @@
+{% extends 'MathBundle::layoutMath.html.twig' %}
+
+{% block title %}{{ parent() }} - Paramètres de partie{% endblock %}
+
+
+{% block contenuMath %}
+
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
+
+{% endblock %}

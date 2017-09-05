@@ -1,0 +1,130 @@
+{% extends 'MathBundle::layoutMath.html.twig' %}
+
+{% block title %}{{ parent() }} - Résultat Partie{% endblock %}
+
+{% block contenuMath %}
+    {% set posFleche=300-(partie.score*3) %}
+    <div class='row'>
+        <div class="col-md-8">
+            <h2 class="text-center">Test: {{ partie.id }}
+                <br/> Joueur: {{partie.joueur.nom }} </h2>
+        </div>
+        <div class="col-md-4 idCandidat">
+            {% if partie.date %}
+                Test passé le {{ partie.date|date('Y-m-d H:m:s')}}
+            {% endif %}
+        </div>
+    </div>
+    <div class='row' id="espace">
+        <div class="col-md-offset-1 col-md-4">
+            <div class='row'>
+                <div class="col-md-3 result">
+                    <p class='resultsucces'>Acquis</p>
+                    <p class='resultatattention'>En&nbsp;cours </p>
+                    <p class='resultatdanger'>Non-acquis</p>
+                </div>
+                <div class="col-md-1">
+                    <div class="skill">
+                        <div class="outer">
+                            <div class="inner" data-progress="85%">
+                                <div></div>
+                            </div>        
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="span" style='position:relative;top:{{posFleche}}px;'>
+                        <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
+                        {{ partie.score }}%
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            {% if partie.score>=70 %}
+                <p class="green text-center">
+                    <i class="fa fa-smile-o"></i><br/>
+                    Félicitation, Test Acquis
+                </p>
+            {% elseif partie.score>=40 %}
+                <p class="orange text-center">
+                    <i class="fa fa-meh-o"></i><br/>
+                    En cours d'acquisition
+                </p>
+            {% else %}
+
+                <p class="red text-center">
+                    <i class="fa fa-frown-o"></i><br/>
+                    Non acquis
+                </p>
+            {% endif %}
+            {#<div class="text-center">
+                {% if Test.getTermine and not is_granted('ROLE_ADMIN') %}
+                    <div class='retour'> <a class="btn btn-default" href="{{ path('index') }}">retour à l'accueil</a></div> 
+                {% else %}
+                    <div class='retour'> <a class="btn btn-default" href="{{ app.request.headers.get('referer') }}">retour</a></div> 
+                {% endif %}
+            </div>#}
+        </div>
+    </div>
+
+    <div class="row detail">
+        <table id="id_table_resultatPartie" class="display">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Opérateur</th>
+                    <th>Question</th>
+                    <th>Résultat</th>
+                    <th>Temps ({{ partie.tempsParQuestion }} sec. dispo)</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for question in listeQuestions %}
+                    <tr>
+                        <td>
+                            {{loop.index}}/{{loop.length}}
+                        </td>
+                        <td>
+                            {{question.operateur.nom|capitalize}}
+                        </td>
+                        <td>
+                            {{question.operande1}} {{question.operateur.symbole}} {{question.operande2}}</a>
+                        </td>
+                        <td>
+                            {% if question.isCorrect %}
+                                <span class="label label-success"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></span> {{question.resultatDonne}}
+                            {% else %}
+                                {% if question.resultatDonne is null %}
+                                    {% set reponseDonne = 'Non répondu' %}
+                                {% else %}
+                                    {% set reponseDonne = question.resultatDonne %}
+                                {% endif %}
+                            <span class="label label-danger" ><i class="fa fa-thumbs-o-down" aria-hidden="true"></i></span> {{reponseDonne}} => {{question.resultatCorrect}}
+                            {% endif %}
+                        </td>
+                        <td>
+                            {{(question.tempsPasse*100)/partie.tempsParQuestion}}% ({{question.tempsPasse}}sec.)
+                        </td>
+                    </tr>
+                {% endfor%}
+            </tbody>
+        </table>
+    </div>
+    <div class="row well">
+        <div class="col-lg-12">
+            {% if app.session.get('joueurMath') %}
+                <a type="button" class="btn btn-primary " href="{{ path('rejouer', {'idPartiePrecedente':partie.id }) }}" >Refaire une partie avec</br>les même paramètres !</a>
+                <a type="button" class="btn btn-primary " href="{{ path('creerPartieParametres') }}" >Refaire une partie avec</br>des paramètres différents!</a>
+                <a type="button" class="btn btn-primary" href="{{ path('listePartie', {'idJoueur':partie.joueur.id }) }}" >Voir mes scores</a>
+                <a type="button" class="btn btn-warning" href="{{ path('logoutJoueur')}}" >Me déconnecter</a>
+            {% else %}
+                <a type="button" class="btn btn-info " href="{{ path('listePartie') }}" >Liste des résultats !</a>
+            {% endif %}
+            </div>
+        </div>
+        {#<div class="row">
+            <div class="col-lg-6">
+            </div>
+        </div>#}
+        {% endblock %}

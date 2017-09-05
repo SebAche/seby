@@ -1,0 +1,50 @@
+{% extends 'MathBundle::layoutMath.html.twig' %}
+
+{% block title %}{{ parent() }} - Liste des joueurs{% endblock %}
+
+{% block contenuMath %}
+    <table id="id_table_joueur" class="display">
+        <thead>
+            <tr>
+                {#            {{ dump(action)}}#}
+                {% if action == 'gestion'%}
+                    <th>Joueur :</th>
+                    <th>Supprimer :</th>
+                    {% elseif action == 'selection'%}
+                    <th>Me connecter en tant que :</th>
+                    {% elseif action == 'historique'%}
+                    <th>Joueur :</th>
+                    <th>Consulter historique :</th>
+                    {% endif %}
+            </tr>
+        </thead>
+        {% for joueur in listeJoueurs %}
+            <tr>
+                {% if action  == 'gestion' %}
+                    <td>
+                        <a type="button" class="btn btn-primary" >{{ joueur.nom|e }}</a>
+                    </td>
+                    <td>
+                        <a type="button" class="btn btn-danger" href="{{ path('deleteJoueur', {'id':joueur.id}) }}"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                    </td>
+                {% elseif action == 'selection'%}
+                    <td>
+                        <a type="button" class="btn btn-primary" href="{{ path('sessionJoueur', {'id':joueur.id}) }}">{{ joueur.nom|e }}</a>
+                    </td>
+                {% elseif action == 'historique'%}
+                    <td>
+                        <a type="button" class="btn btn-primary" >{{ joueur.nom|e }}</a>
+                    </td>
+                    <td>
+                        <a type="button" class="btn btn-primary" href=""><i class="fa fa-line-chart" aria-hidden="true"></i></a>
+                    </td>
+                {% endif %}
+            </tr>
+        {% endfor%}
+        <tbody>
+        </tbody>
+    </table>
+    {% if action == 'selection'%}
+        <a type='button' class='btn btn-primary' href='{{ path('creationJoueur') }}'>Créer un nouveau joueur</a>
+    {% endif %}
+{% endblock %}

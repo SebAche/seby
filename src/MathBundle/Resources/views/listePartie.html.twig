@@ -1,0 +1,52 @@
+{% extends 'MathBundle::layoutMath.html.twig' %}
+
+{% block title %}{{ parent() }} - Résultat Partie{% endblock %}
+
+{% block contenuMath %}
+    <div class='row statistique'>
+
+    </div>
+    <div class='row tableau'>
+        <table id="id_table_listePartie">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Joueur</th>
+                    <th>Nb Question</th>
+                    <th>Score</th>
+                    <th>Détail</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for partie in listePartie %}
+                    <tr>
+                        <td>
+                            {{partie.date|date("d/m/Y")}}
+                        </td>
+                        <td>
+                            {{partie.joueur.nom}}
+                        </td>
+                        <td>
+                            {{partie.quantiteQuestion}}
+                        </td>
+                        <td><h3>
+                            {% if partie.score > 70 %}
+                                <span class="label label-success"><i class="fa fa-thumbs-o-up" aria-hidden="true">
+                            {% elseif partie.score < 71 and partie.score > 30  %}
+                                <span class="label label-warning"><i class="fa fa-exclamation-triangle" aria-hidden="true">
+                            {% elseif partie.score < 31  %}
+                                <span type="label" class="label label-danger" ><i class="fa fa-thumbs-o-down" aria-hidden="true">
+                            {% endif %}
+                            {{ partie.score }} % </i></span>
+                            </h3>
+                        </td>
+                        <td>
+                            <a type="button" class="btn btn-primary" href="{{ path('resultat_partie', {'idPartie':partie.id }) }}" ><i class="fa fa-search" aria-hidden="true"></i></a>
+                        </td>
+                    </tr>
+                {% endfor%}
+            </tbody>
+        </table>
+
+    </div>
+{% endblock %}

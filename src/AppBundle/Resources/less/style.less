@@ -1,0 +1,75 @@
+@import "..\bootstrap\less\bootstrap.less";
+
+@couleur_gris_33: #333333;
+@couleur_gris_80: #808080;
+@couleur_gris_4d: #4d4d4d;
+@couleur_gris_66: #666666;
+@couleur_gris_1a: #1a1a1a;
+
+@couleur_base: #8DC63F; //vert pomme
+@hauteur_menu_top : 40px;
+@couleur_form_error: red;
+
+@size_switch_display: 768px;
+
+
+body {
+    margin:0;
+    padding:0;
+    background-color: #DDD;
+    /*opacity: 0.9;*/
+}
+
+ .navbar-inverse {
+    margin:0;
+    padding:0;
+    background: url(../images/bg_cuir.png); 
+    
+}
+
+
+/******* FlashBag *******/
+.flashBag{
+    .make-sm-column(9,0);
+    .make-sm-column-offset(1.5);
+    .make-xs-column(12,0);
+    //margin-top: 20px;
+    .error{
+        .bg-danger;
+        .text-danger;
+    }
+    .info{
+        .bg-info;
+        .text-info;
+    }
+    .success{
+        .bg-success;
+        .text-success;
+    }
+    .warning{
+        .bg-warning;
+        .text-warning;
+    }
+}
+/******* Account *******/
+html body header div.fluid-container nav.navbar.navbar-inverse {
+    border-radius: 0px;
+}
+.navbar-login
+{
+    width: 305px;
+    padding: 10px;
+    padding-bottom: 0px;
+}
+
+.navbar-login-session
+{
+    padding: 10px;
+    padding-bottom: 0px;
+    padding-top: 0px;
+}
+
+.icon-size
+{
+    font-size: 87px;
+}

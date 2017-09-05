@@ -1,0 +1,37 @@
+{% extends 'AppBundle::layout.html.twig' %}
+
+{% block title %}Liste des joueurs - {{ parent() }}{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/app/css/jumbotron-narrow.css') }}" />
+
+{% endblock %}
+
+{% block body %}
+    <table id="id_table_joueur" class="display">
+        <thead>
+            <tr>
+                <th>Nom du Joueur</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        {% for joueur in listeJoueurs %}
+{#            {{ dump(joueur)}}#}
+            <tr>
+                <td>{{ joueur.nom|e }}</td>
+                <td>
+                    <a type="button" class="btn btn-primary" href="{{ path('creerPartieParametres') }}">Nouvelle Partie</a>
+                    <a type="button" class="btn btn-primary" href="{{ path('creerPartieParametres') }}">Voir les scores</a>
+                </td>
+            </tr>
+        {% endfor%}
+        <tbody>
+        </tbody>
+    </table>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type= "text/javascript" src= "{{ asset ( 'bundles/math/js/math.js' ) }}" ></script>
+{% endblock %}

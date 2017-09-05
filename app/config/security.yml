@@ -1,0 +1,69 @@
+# To get started with security, check out the documentation:
+# http://symfony.com/doc/current/book/security.html
+security:
+    encoders:
+        #Symfony\Component\Security\Core\User\User:
+        UserBundle\Entity\User:
+            algorithm: bcrypt
+            cost: 12
+
+    # http://symfony.com/doc/current/book/security.html#where-do-users-come-from-user-providers
+    providers:
+        fos_userbundle:
+            id: fos_user.user_provider.username
+#        our_db_provider:
+#            entity:
+#                class: AppBundle:User
+#                property: username
+#        in_memory:
+#            memory:
+#                users:
+#                    Sylvaine:
+#                        password: $2y$12$hUgWKPVDzjSFSFpJ0VjRpufptjTV90wqmvsflzPGvFtERTy2ql.WK
+#                        roles: 'ROLE_USER'
+#                    Seb:
+#                        password: $2y$12$5g3PuVk8WaRFaMRx457Kl.xN.UBF5lN.bXkZs.AwYbWBNEHTlKkO2
+#                        roles: 'ROLE_ADMIN'
+     #pour info 10021978 et test                   
+    role_hierarchy:
+        ROLE_ADMIN:       ROLE_USER
+        ROLE_SUPER_ADMIN: [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+        
+    firewalls:
+        # disables authentication for assets and the profiler, adapt it according to your needs
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        main:
+            pattern: ^/
+            #anonymous: ~
+            #http_basic: ~
+            form_login:
+                provider: fos_userbundle
+                #csrf_provider: security.csrf.token_manager # Use form.cs
+                
+            logout:     true
+            anonymous:  true
+#            provider: our_db_provider
+#            form_login:
+#                login_path: login
+#                check_path: login
+#            logout:
+#                path:   /logout
+#                target: /login
+            remember_me:
+                secret:   '%secret%'
+                lifetime: 604800 # 1 week in seconds
+                path:     /
+            # activate different ways to authenticate
+    access_control:
+        # require ROLE_ADMIN for /admin*
+        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/messagerie, roles: ROLE_USER }
+        - { path: ^/admin, roles: ROLE_ADMIN }
+            # http_basic: ~
+            # http://symfony.com/doc/current/book/security.html#a-configuring-how-your-users-will-authenticate
+
+            # form_login: ~
+            # http://symfony.com/doc/current/cookbook/security/form_login_setup.html

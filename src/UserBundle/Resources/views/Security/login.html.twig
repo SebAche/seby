@@ -1,0 +1,54 @@
+{% extends "UserBundle::layout.html.twig" %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/app/css/signin.css') }}" />
+{% endblock %}
+
+{% block fos_user_content %}
+    <div class="login"> 
+        <a class="btn btn-success" data-toggle="modal" data-target="#login">
+            <i class="fa fa-sign-in fa-4x" aria-hidden="true"></i>
+        {% if error %}
+            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        {% endif %}
+        </a>
+    </div>
+    
+    <!-- Modal -->
+    <div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="Invit Login">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">{{ 'security.login.title'|trans }}</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-signin" action="{{ path("fos_user_security_check") }}" method="post">
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+                        <h2 class="form-signin-heading">{{ 'security.login.title'|trans }}</h2>
+                        <label class="sr-only" for="username">{{ 'security.login.username'|trans }}</label>
+                        <input class="form-control" type="text" id="username" name="_username" value="{{ last_username }}" placeholder="{{ 'security.login.username'|trans }}" required="required" autofocus/>
+
+                        <label class="sr-only" for="password">{{ 'security.login.password'|trans }}</label>
+                        <input class="form-control" type="password" id="password" name="_password" placeholder="{{ 'security.login.password'|trans }}" required="required" />
+
+                        <div class="checkbox">
+                            <label for="remember_me">
+                                <input type="checkbox" id="remember_me" name="_remember_me" value="on" />{{ 'security.login.remember_me'|trans }}
+                            </label>
+                        </div>
+                        <button class="btn btn-lg btn-success btn-block" type="submit" id="_submit" name="_submit" >{{ 'security.login.submit'|trans }}</button>
+                    </form>
+                </div>
+                {#<div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>#}
+            </div>
+        </div>
+    </div>
+    <!-- Fin Modal -->
+
+{% endblock fos_user_content %}

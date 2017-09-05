@@ -1,0 +1,54 @@
+{% extends 'AppBundle:Messagerie:index.html.twig' %}
+
+{% block title %}Listing Contact - {{ parent() }}{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block contenuMessagerie %}    
+    Ici la liste des contacts
+    <table id="TableListingContact" class="display">
+    <thead>
+        <tr>
+            <th>Nom</th>
+            <th>Prénom</th>
+            <th>E-mail</th>
+            <th>Tel</th>
+            <th>Date Anni</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {%if listContact%}
+        {% for contact in listContact %}
+            <tr>
+                <td>{{ contact.nom }}</td>
+                <td>{{ contact.prenom|e }}</td>
+                <td>{{ contact.email|e }}</td>
+                <td>{{ contact.tel|e }}</td>
+                <td>{{ contact.dateNaissance|date("d/m/Y") }}</td>
+                <td><button type="button" class="btn btn-info">
+                        <i class="fa fa-pencil" aria-hidden="true"></i>
+                    </button>
+                    <button type="button" class="btn btn-danger">
+                        <i class="fa fa-trash-o" aria-hidden="true"></i>
+                    </button>
+                </td>
+                
+            </tr>
+        {% endfor %}
+    {%endif%}
+    </tbody>
+    </table>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type= "text/javascript" >
+        $(document).ready( function () {
+            $('#TableListingContact').DataTable();
+        } );
+        
+    </script>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends 'MathBundle::layoutMath.html.twig' %}
+
+{% block title %}{{ parent() }} - Accueil{% endblock %}
+
+{% block jumbotron %}
+    <div class="jumbotron">
+        <h1>Jeu de Math</h1>
+        <p class="lead">Rien de tel qu'apprendre en s'amusant ! ^^</p>
+        {#            <p><a class="btn btn-lg btn-success" href="#" role="button">Sign up today</a></p>#}
+    </div>
+{% endblock %}
+
+{% block contenuMath %}
+
+    {#    {{dump(joueurSelectionne[0])}}#}
+    {% if joueurSelectionne != NULL %}
+        <div class="panel panel-default">
+            <div class="panel-body">Bonjour {{joueurSelectionne.nom|e}} !
+            </div>
+        </div>
+
+        <a type="button" class="btn btn-primary" href="{{ path('creerPartieParametres') }}" >Nouvelle Partie</a>
+        <a type="button" class="btn btn-primary" href="{{ path('logoutJoueur')}}" >Se déconnecter</a>
+        <a type="button" class="btn btn-primary" href="{{ path('listePartie', {'idJoueur':joueurSelectionne.id }) }}" >Voir mes scores</a>
+
+    {% else %}
+        <div class="panel panel-default">
+            <div class="panel-body">Bonjour "Visiteur" !<br/> 
+                Identifiez-vous pour pouvoir commencer à jouer
+            </div>
+        </div>
+        <a type="button" class="btn btn-primary" href="{{ path('listeSelectionJoueur') }}" >S'identifier</a>
+        <a type="button" class="btn btn-primary" href="{{ path('listeHistoriqueJoueur') }}" >Voir les scores par joueur</a>
+        <a type="button" class="btn btn-primary" href="{{ path('listePartie') }}" >Voir tous les scores</a>
+        <a type="button" class="btn btn-warning" href="{{ path('listeGestionJoueur') }}" >Gérer les joueurs</a>
+    {% endif %}
+
+
+{% endblock %}

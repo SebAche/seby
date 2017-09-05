@@ -1,0 +1,86 @@
+{% extends 'AppBundle::layout.html.twig' %}
+
+{% block title %}Administration - {{ parent() }}{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    
+{% endblock %}
+
+{% block body %}
+        <header>
+        <div class="fluid-container">
+            <nav class="navbar navbar-inverse">
+                <div class="container">
+                    <div class="navbar-header hidden-sm">
+                        <button type="button" data-target=".navbar-collapse" data-toggle="collapse" class="navbar-toggle">
+                            <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                        </button>
+                        <a href="{{path('homepageAdmin')}}" class="navbar-brand">Administration</a>
+                    </div>
+                    <div class="collapse navbar-collapse">
+                        <ul class="nav navbar-nav">
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <li><a href="{{path('admin_user')}}"><i class="fa fa-envelope-o"></i> Gestion des Users</a></li>
+                            {% endif %}
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <li><a href="{{path('admin_group')}}"><i class="fa fa-envelope-o"></i> Gestion des Groupes de Users</a></li>
+                            {% endif %}
+                            <li><a href="{{path('accueil')}}"><i class="fa fa-home"></i> Accueil</a></li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <span class="glyphicon glyphicon-user"></span> 
+                                    <strong>{{ app.user.getUsername()}}</strong>
+                                    <span class="glyphicon glyphicon-chevron-down"></span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <div class="navbar-login">
+                                            <div class="row">
+                                                <div class="col-lg-4">
+                                                    <p class="text-center">
+                                                        <span class="glyphicon glyphicon-user icon-size"></span>
+                                                    </p>
+                                                </div>
+                                                <div class="col-lg-8">
+                                                    <p class="text-left"><strong>{{ app.user.getUsername()}}</strong></p>
+                                                    <p class="text-left small">{{ app.user.getEmail()}}</p>
+                                                    <p class="text-left">
+                                                        <a href="{{ path('fos_user_profile_edit')}}" class="btn btn-primary btn-block btn-sm">Modifier les info</a>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="divider"></li>
+                                    <li>
+                                        <div class="navbar-login navbar-login-session">
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <p>
+                                                        <a href="{{path('fos_user_security_logout')}}" class="btn btn-danger btn-block">Logout</a>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <div class="container" >
+    <div class="row" >
+        {% block insert %}
+        {% endblock insert %}   
+    </div>
+    </div>
+    {#{{ form(form, {attr: {novalidate: 'novalidate'}}) }}#}
+{% endblock body %}

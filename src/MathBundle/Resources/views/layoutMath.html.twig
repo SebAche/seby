@@ -1,0 +1,41 @@
+{% extends 'AppBundle::layout.html.twig' %}
+
+{% block title %}{{ parent() }} - Math{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/app/css/jumbotron-narrow.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/math/css/math.css') }}" />
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="header clearfix">
+            <nav>
+                <ul class="nav nav-pills pull-right">
+                    <li role="presentation" class="active"><a href="{{ path('math') }}">Accueil</a></li>
+{#                    <li role="presentation"><a href="#">About</a></li>#}
+{#                    <li role="presentation"><a href="#">Contact</a></li>#}
+                </ul>
+            </nav>
+            <h3 class="text-muted">Math is a Game !</h3>
+        </div>
+        {% block jumbotron %}
+        {% endblock %}
+
+        <div class="row marketing">
+           {% block contenuMath %}
+           {% endblock %}
+        </div>
+
+        <footer class="footer">
+            <p>&copy; 2016 T.A.T.C ;)</p>
+        </footer>
+
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type= "text/javascript" src= "{{ asset ( 'bundles/math/js/math.js' ) }}" ></script>
+{% endblock %}
