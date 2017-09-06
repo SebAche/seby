@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "95cd3a66a0fb6279d77de2aaa10d7e5f",
+    "content-hash": "d8c8c77200973efd2d2489203b0130e9",
     "packages": [
         {
             "name": "composer/ca-bundle",
@@ -3710,7 +3710,6 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "jms/serializer-bundle": 20,
         "pugx/generator-bundle": 20,
         "friendsofsymfony/user-bundle": 20,
         "coresphere/console-bundle": 20
@@ -3718,7 +3717,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=7.0.0",
+        "php": ">=5.5",
         "ext-pdo_sqlite": "*"
     },
     "platform-dev": []
