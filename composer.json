@@ -15,11 +15,12 @@
   ]
 },
   "require": {
-    "php": ">=5.5",
+    "php": ">=5.3.9",
+    "coresphere/console-bundle": "dev-master",
     "ext-pdo_sqlite": "*",
-    "doctrine/doctrine-bundle": "~1.6",
-    "doctrine/doctrine-fixtures-bundle": "~2.2",
-    "doctrine/orm": "~2.5",
+    "doctrine/doctrine-bundle": "~1.2",
+    "doctrine/doctrine-fixtures-bundle": "2.3.0",
+    "doctrine/orm": "^2.5.2",
     "erusev/parsedown": "~1.5",
     "ezyang/htmlpurifier": "~4.7",
     "incenteev/composer-parameter-handler": "~2.1",
@@ -29,21 +30,20 @@
     "leafo/scssphp": "^0.4.0",
     "lexik/form-filter-bundle": "~5.0",
     "patchwork/jsqueeze": "~1.0",
-    "pugx/generator-bundle": "dev-master",
+    "pugx/generator-bundle": "2.4.6",
     "sensio/distribution-bundle": "~5.0",
-    "sensio/framework-extra-bundle": "~3.0",
+    "sensio/framework-extra-bundle": "^3.0.2",
     "symfony/assetic-bundle": "~2.6",
     "symfony/monolog-bundle": "~2.7",
     "symfony/swiftmailer-bundle": "~2.3",
     "friendsofsymfony/user-bundle": "~2.0@dev",
-    "symfony/symfony": "~3.0",
+    "symfony/symfony": "2.8.*",
     "twig/extensions": "~1.2",
-    "white-october/pagerfanta-bundle": "^1.0",
-    "coresphere/console-bundle": "dev-master"
+    "white-october/pagerfanta-bundle": "^1.0"
   },
   "require-dev": {
-    "sensio/generator-bundle": "~3.0",
-    "symfony/phpunit-bridge": "^3.0"
+    "sensio/generator-bundle": "~2.5",
+    "symfony/phpunit-bridge": "~2.7"
   },
   "scripts": {
     "symfony-scripts": [
